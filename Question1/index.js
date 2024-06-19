@@ -1,6 +1,7 @@
 const express = require("express")
 const axios = require("axios")
 const app = express()
+const cors = require('cors');
 const MAX_PRODUCTS_PER_PAGE = 10; 
 const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzE4Nzc0MTU2LCJpYXQiOjE3MTg3NzM4NTYsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImRjOTUxNTFlLTFmYmItNGQ4Ny1hYjkzLTNiYTg4OGRkYzAzMCIsInN1YiI6IjIxMDMwMzEyNDMyNkBwYXJ1bHVuaXZlcnNpdHkuYWMuaW4ifSwiY29tcGFueU5hbWUiOiJQYXJ1bCBVbml2ZXJzaXR5IiwiY2xpZW50SUQiOiJkYzk1MTUxZS0xZmJiLTRkODctYWI5My0zYmE4ODhkZGMwMzAiLCJjbGllbnRTZWNyZXQiOiJLWW9Eb0p0TU9WcWFob2NwIiwib3duZXJOYW1lIjoiQ2hpbnRhbGEgR3VuYSBTYWkiLCJvd25lckVtYWlsIjoiMjEwMzAzMTI0MzI2QHBhcnVsdW5pdmVyc2l0eS5hYy5pbiIsInJvbGxObyI6IjIxMDMwMzEyNDMyNiJ9.9SCYgPImlq0e689Szg2hbJONaGvrmFCh71CWU1K0rwc';
 
@@ -8,7 +9,7 @@ const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZX
 
 const fetchProducts = async (companyName, categoryName, n, accessToken ) => {
     try{
-        const response = await axios.get(`http://20.244.56.144/test/companies/:${companyName}/categories/:${categoryName}/products/top-${n}`, {
+        const response = await axios.get(`http://20.244.56.144/test/companies/:${companyName}/categories/:${categoryName}/products?top=${n}`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`
             }
@@ -21,6 +22,7 @@ const fetchProducts = async (companyName, categoryName, n, accessToken ) => {
     }
 }
 
+app.use(cors())
 app.get("/categories/:categoryName/products", async (req, res) => {
     const categoryName = req.params.categoryName;
     console.log(categoryName);
@@ -42,4 +44,4 @@ app.get("/categories/:categoryName/products", async (req, res) => {
     }
 })
 
-app.listen(3000)
+app.listen(3001)

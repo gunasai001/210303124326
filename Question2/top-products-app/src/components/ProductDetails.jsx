@@ -26,7 +26,7 @@ const ProductDetails = () => {
   return (
     <div className="container mx-auto my-8">
       <div className="bg-white rounded-lg shadow-md p-4">
-        <img src={`https://picsum.photos/600/400?random=${product.id}`} alt={product.name} className="w-full h-64 object-cover mb-4" />
+        
         <h2 className="text-2xl font-semibold mb-2">{product.name}</h2>
         <p className="text-gray-600">Company: {product.company}</p>
         <p className="text-gray-600">Category: {product.category}</p>
